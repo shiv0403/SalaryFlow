@@ -1,0 +1,12 @@
+{
+  "express": {
+    "port": 5050
+  },
+  "db": {
+    "database": "salaryflow",
+    "user": "salaryflow",
+    "password": "buck",
+    "host": "localhost",
+    "port": 3306
+  }
+}
