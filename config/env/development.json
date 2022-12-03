@@ -8,5 +8,12 @@
     "password": "buck",
     "host": "localhost",
     "port": 3306
+  },
+  "password": {
+    "saltRounds": 10
+  },
+  "jwt": {
+    "JWT_SECRET": "randomsecret",
+    "maxAge": 86400000
   }
 }

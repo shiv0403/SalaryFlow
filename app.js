@@ -18,5 +18,5 @@ module.exports = function (app, router) {
   });
 
   // app.use("*", checkUser);
-  app.use("/v1", router);
+  app.use("/api/v1", router);
 };
