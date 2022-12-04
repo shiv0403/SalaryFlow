@@ -1,0 +1,6 @@
+{
+  "RMB_NOT_ADDED": "reimbursement not created",
+  "RMB_NOT_GET": "Could not get reimbursement",
+  "RMB_NOT_UPDATE": "reimbursement could not updated",
+  "RMB_UPDATED": "reimbursement updated"
+}

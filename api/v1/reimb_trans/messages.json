@@ -1,0 +1,5 @@
+{
+  "RMB_NOT_ADDED": "reimbursement trans not completed",
+  "RMB_NOT_GET": "could not get reimbursement",
+  "RMB_NOT_FOUND": "no reimbursement trans for this user"
+}
