@@ -43,6 +43,17 @@ exports.signup = async function (req, res) {
       auto_pay: 0,
     });
 
+    await db.User.Update(
+      {
+        org_id: org.id,
+      },
+      {
+        where: {
+          id: user.id,
+        },
+      }
+    );
+
     const token = jwt.sign(
       { userId: user.user_id, email: user.email },
       config.jwt.JWT_SECRET
