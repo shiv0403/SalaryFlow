@@ -1,0 +1,8 @@
+{
+  "LEAVE_NOT_ADDED": "leave not added",
+  "LEAVE_NOT_GET": "Could not get leave",
+  "LEAVES_NOT_GET": "Could not get leaves",
+  "LEAVE_STATUS_NOT_UPDATED": "leave status not updated",
+  "LEAVE_STATUS_UPDATED": "leave status updated",
+  "LEAVE_NOT_FOUND": "leave not found"
+}
