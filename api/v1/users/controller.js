@@ -108,6 +108,30 @@ exports.login = async function (req, res) {
 //@desc : only for admin
 exports.updateUser = async function (req, res) {};
 
+exports.getOrgEmps = async function (req, res) {
+  let { org_id } = req.params;
+  try {
+    const emps = await db.User.findAll({
+      include: [
+        {
+          model: db.Position,
+          as: "position",
+        },
+        {
+          model: db.Department,
+          as: "department",
+        },
+      ],
+      where: {
+        org_id,
+      },
+    });
+    res.status(200).send(emps);
+  } catch (error) {
+    res.status(500).send({ msg: messages.EMPS_NOT_GET });
+  }
+};
+
 exports.logout = async function (req, res) {
   res.cookie("jwt", "", { maxAge: 0 });
   res.status(200).send({ msg: "logged out" });

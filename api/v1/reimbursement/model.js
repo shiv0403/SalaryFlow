@@ -7,7 +7,9 @@ module.exports = function (sequelize, DataTypes) {
       rmb_receipt: DataTypes.STRING,
       rmb_reason: DataTypes.STRING,
       user_id: DataTypes.INTEGER,
+      org_id: DataTypes.INTEGER,
       isClaimed: DataTypes.INTEGER,
+      remark: DataTypes.STRING,
       createdAt: {
         type: DataTypes.DATE,
         set() {
@@ -26,5 +28,14 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
     }
   );
+
+  Reimbursement.associate = function (models) {
+    Reimbursement.hasOne(models.User, {
+      foreignKey: "id",
+      sourceKey: "user_id",
+      as: "user",
+    });
+  };
+
   return Reimbursement;
 };

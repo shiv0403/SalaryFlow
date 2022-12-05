@@ -2,5 +2,6 @@
   "USER_NOT_CREATED": "User not created",
   "USER_NOT_FOUND": "User not found",
   "USER_NOT_LOGGEDIN": "User login failed",
-  "PASSWORD_INCORRECT": "Incorrect password"
+  "PASSWORD_INCORRECT": "Incorrect password",
+  "EMPS_NOT_GET": "could not get employees"
 }

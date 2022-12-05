@@ -1,18 +1,51 @@
+const { Sequelize } = require("sequelize");
 const db = require("../../../config/sequelize");
 const messages = require("./messages.json");
+const { Op } = require("sequelize");
 
 exports.addReimb = async function (req, res) {
-  let { rmb_receipt, rmb_reason, user_id, isClaimed } = req.body;
+  let { rmb_receipt, rmb_reason, user_id, org_id, isClaimed, remark } =
+    req.body;
   try {
     const reimb = await db.Reimbursement.create({
       rmb_receipt,
       rmb_reason,
       user_id,
+      org_id,
+      remark,
       isClaimed,
     });
     res.status(201).send(reimb);
   } catch (error) {
     res.status(500).send({ msg: messages.RMB_NOT_ADDED });
+  }
+};
+
+exports.getRmbOrg = async function (req, res) {
+  let { org_id } = req.params;
+  try {
+    const reimbs = await db.Reimbursement.findAll({
+      include: [
+        {
+          model: db.User,
+          as: "user",
+        },
+      ],
+      where: {
+        org_id,
+      },
+    });
+
+    let count_pending = 0;
+    for (let i = 0; i < reimbs.length; ++i) {
+      if (reimbs[i].isClaimed === 0) {
+        count_pending++;
+      }
+    }
+
+    res.status(200).send({ reimbs, count_pending });
+  } catch (error) {
+    res.status(500).send({ msg: messages.RMB_NOT_GET });
   }
 };
 

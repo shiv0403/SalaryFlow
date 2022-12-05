@@ -34,5 +34,20 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
     }
   );
+
+  User.associate = function (models) {
+    User.hasOne(models.Position, {
+      foreignKey: "id",
+      sourceKey: "pos_id",
+      as: "position",
+    });
+
+    User.hasOne(models.Department, {
+      foreignKey: "id",
+      sourceKey: "dept_id",
+      as: "department",
+    });
+  };
+
   return User;
 };
