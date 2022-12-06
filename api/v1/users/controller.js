@@ -1,5 +1,9 @@
 const db = require("../../../config/sequelize");
-const { hashPassword, comparePasswords } = require("../../../helper/utils");
+const {
+  hashPassword,
+  comparePasswords,
+  makePassword,
+} = require("../../../helper/utils");
 const jwt = require("jsonwebtoken");
 const messages = require("./messages.json");
 const logger = require("../../../helper/logger");
@@ -129,14 +133,43 @@ exports.addEmp = async function (req, res) {
 
 exports.addOrgEmps = async function (req, res) {
   let { emps_data } = req.body;
+  db.User.bulkCreate(emps_data)
+    .then((response) => {
+      let emps_arr = [];
+      for (let i = 0; i < emps_data.length; ++i) {
+        let pass = hashPassword(makePassword(5));
+        emps_arr.push({ email: emps_data[i].email, password: pass });
+      }
+      res.status(200).send(emps_arr);
+    })
+    .catch((err) => {
+      logger.warn(err.message);
+      res.status(500).send({ msg: messages.EMP_NOT_ADDED });
+    });
+};
+
+//@desc : only for admin
+exports.updateUser = async function (req, res) {
+  let { user_id, f_name, l_name, pos_id, dept_id } = req.body;
   try {
+    const user = await db.User.update(
+      {
+        f_name,
+        l_name,
+        pos_id,
+        dept_id,
+      },
+      {
+        where: {
+          id: user_id,
+        },
+      }
+    );
+    res.status(200).send({ msg: messages.EMP_UPDATED });
   } catch (error) {
     res.status(500).send({ msg: messages.EMP_NOT_ADDED });
   }
 };
-
-//@desc : only for admin
-exports.updateUser = async function (req, res) {};
 
 exports.getOrgEmps = async function (req, res) {
   let { org_id } = req.params;

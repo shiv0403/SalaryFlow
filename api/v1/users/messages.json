@@ -4,5 +4,7 @@
   "USER_NOT_LOGGEDIN": "User login failed",
   "PASSWORD_INCORRECT": "Incorrect password",
   "EMPS_NOT_GET": "could not get employees",
-  "EMP_NOT_ADDED": "employee not added"
+  "EMP_NOT_ADDED": "employee not added",
+  "EMP_NOT_UPDATED": "employee not updated",
+  "EMP_UPDATED": "employee udpated"
 }
