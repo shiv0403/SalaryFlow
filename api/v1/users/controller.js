@@ -116,7 +116,7 @@ exports.addEmp = async function (req, res) {
       f_name,
       l_name,
       email,
-      password: hashPassword("test"),
+      password: hashPassword(makePassword(5)),
       isAdmin: 0,
       pos_id,
       dept_id,
