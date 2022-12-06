@@ -16,6 +16,26 @@ exports.addDept = async function (req, res) {
   }
 };
 
+exports.getDeptId = async function (req, res) {
+  let { org_id, deptName } = req.params;
+  try {
+    const dept_id = await db.Department.findOne({
+      attributes: ["id"],
+      where: {
+        org_id,
+        dept_name: deptName,
+      },
+    });
+    if (dept_id === null) {
+      return res.status(404).send({ msg: messages.DEPT_NOT_FOUND });
+    }
+    res.status(200).send(dept_id);
+  } catch (error) {
+    logger.warn(error.message);
+    res.status(500).send({ msg: messages.DEPT_ID_NOT_FOUND });
+  }
+};
+
 exports.getDept = async function (req, res) {
   let { org_id } = req.params;
   try {

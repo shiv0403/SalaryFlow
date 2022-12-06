@@ -1,5 +1,6 @@
 {
   "DEPT_NOT_ADDED": "Dept not added",
   "DEPT_NOT_FOUND": "Dept not found",
-  "DEPT_NOT_GET": "Could not get depts"
+  "DEPT_NOT_GET": "Could not get depts",
+  "DEPT_ID_NOT_FOUND": "dept id not found"
 }
