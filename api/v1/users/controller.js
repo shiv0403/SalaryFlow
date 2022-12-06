@@ -125,7 +125,7 @@ exports.addEmp = async function (req, res) {
     });
 
     //also mail the emp their creds
-    res.status(201).send(emp);
+    res.status(201).send({ ...emp.dataValues, password: "test" });
   } catch (error) {
     res.status(500).send({ msg: messages.EMP_NOT_ADDED });
   }
@@ -133,12 +133,15 @@ exports.addEmp = async function (req, res) {
 
 exports.addOrgEmps = async function (req, res) {
   let { emps_data } = req.body;
-  let emps_arr = [];
+  let emps_arr = [],
+    db_emps_arr = [];
   for (let i = 0; i < emps_data.length; ++i) {
-    let pass = hashPassword(makePassword(5));
-    emps_arr.push({ ...emps_data[i], password: pass });
+    let user_pass = makePassword(5);
+    let pass = hashPassword(user_pass);
+    emps_arr.push({ ...emps_data[i], password: user_pass });
+    db_emps_arr.push({ ...emps_data[i], password: pass });
   }
-  db.User.bulkCreate(emps_arr)
+  db.User.bulkCreate(db_emps_arr)
     .then((response) => {
       res.status(200).send(emps_arr);
     })
