@@ -3,5 +3,6 @@
   "USER_NOT_FOUND": "User not found",
   "USER_NOT_LOGGEDIN": "User login failed",
   "PASSWORD_INCORRECT": "Incorrect password",
-  "EMPS_NOT_GET": "could not get employees"
+  "EMPS_NOT_GET": "could not get employees",
+  "EMP_NOT_ADDED": "employee not added"
 }

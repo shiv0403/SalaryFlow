@@ -43,7 +43,7 @@ exports.signup = async function (req, res) {
       auto_pay: 0,
     });
 
-    await db.User.Update(
+    await db.User.update(
       {
         org_id: org.id,
       },
@@ -102,6 +102,36 @@ exports.login = async function (req, res) {
     }
   } catch (error) {
     res.status(500).send({ err: messages.USER_NOT_LOGGED_IN });
+  }
+};
+
+exports.addEmp = async function (req, res) {
+  let { f_name, l_name, email, pos_id, dept_id, doj, org_id } = req.body;
+  try {
+    const emp = await db.User.create({
+      f_name,
+      l_name,
+      email,
+      password: hashPassword("test"),
+      isAdmin: 0,
+      pos_id,
+      dept_id,
+      org_id,
+      doj,
+    });
+
+    //also mail the emp their creds
+    res.status(201).send(emp);
+  } catch (error) {
+    res.status(500).send({ msg: messages.EMP_NOT_ADDED });
+  }
+};
+
+exports.addOrgEmps = async function (req, res) {
+  let { emps_data } = req.body;
+  try {
+  } catch (error) {
+    res.status(500).send({ msg: messages.EMP_NOT_ADDED });
   }
 };
 
