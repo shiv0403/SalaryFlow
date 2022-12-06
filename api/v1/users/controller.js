@@ -133,13 +133,13 @@ exports.addEmp = async function (req, res) {
 
 exports.addOrgEmps = async function (req, res) {
   let { emps_data } = req.body;
-  db.User.bulkCreate(emps_data)
+  let emps_arr = [];
+  for (let i = 0; i < emps_data.length; ++i) {
+    let pass = hashPassword(makePassword(5));
+    emps_arr.push({ ...emps_data[i], password: pass });
+  }
+  db.User.bulkCreate(emps_arr)
     .then((response) => {
-      let emps_arr = [];
-      for (let i = 0; i < emps_data.length; ++i) {
-        let pass = hashPassword(makePassword(5));
-        emps_arr.push({ email: emps_data[i].email, password: pass });
-      }
       res.status(200).send(emps_arr);
     })
     .catch((err) => {
