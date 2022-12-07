@@ -8,6 +8,7 @@ module.exports = function (sequelize, DataTypes) {
       rmb_reason: DataTypes.STRING,
       user_id: DataTypes.INTEGER,
       org_id: DataTypes.INTEGER,
+      rmb_amt: DataTypes.DOUBLE,
       isClaimed: DataTypes.INTEGER,
       remark: DataTypes.STRING,
       createdAt: {

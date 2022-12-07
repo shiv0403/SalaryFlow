@@ -4,7 +4,7 @@ const messages = require("./messages.json");
 const { Op } = require("sequelize");
 
 exports.addReimb = async function (req, res) {
-  let { rmb_receipt, rmb_reason, user_id, org_id, isClaimed, remark } =
+  let { rmb_receipt, rmb_reason, user_id, org_id, isClaimed, remark, rmb_amt } =
     req.body;
   try {
     const reimb = await db.Reimbursement.create({
@@ -12,6 +12,7 @@ exports.addReimb = async function (req, res) {
       rmb_reason,
       user_id,
       org_id,
+      rmb_amt,
       remark,
       isClaimed,
     });
