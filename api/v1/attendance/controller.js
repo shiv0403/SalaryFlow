@@ -18,6 +18,20 @@ exports.markAttendance = async function (req, res) {
   }
 };
 
+exports.getAttendanceUser = async function (req, res) {
+  let { user_id } = req.params;
+  try {
+    const attendance = await db.Attendance.findAll({
+      where: {
+        user_id,
+      },
+    });
+    res.status(200).send(attendance);
+  } catch (error) {
+    res.status(500).send({ msg: "could not get attendance" });
+  }
+};
+
 exports.getAttendance = async function (req, res) {
   let { org_id } = req.params;
 
