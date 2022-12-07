@@ -5,11 +5,12 @@ const logger = require("../../../helper/logger");
 const Sequelize = require("sequelize");
 
 exports.addSalaryTrans = async function (req, res) {
-  let { userIds, org_id } = req.body;
+  let { userIds, org_id, remark } = req.body;
   try {
     const salaryTrans = await db.SalaryTrans.create({
       user_ids: userIds.toString(),
       org_id,
+      remark,
     });
     res.status(201).send(salaryTrans);
   } catch (error) {

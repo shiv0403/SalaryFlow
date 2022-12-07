@@ -7,6 +7,7 @@ module.exports = function (sequelize, DataTypes) {
       user_ids: DataTypes.STRING,
       org_id: DataTypes.INTEGER,
       user_bank_id: DataTypes.INTEGER,
+      remark: DataTypes.STRING,
       createdAt: {
         type: DataTypes.DATE,
         set() {
