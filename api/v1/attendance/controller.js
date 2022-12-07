@@ -24,6 +24,20 @@ exports.getAttendance = async function (req, res) {
   try {
     let curr_date = moment().format("YYYY-MM-DD");
     const attendance = await db.Attendance.findAll({
+      include: [
+        {
+          model: db.User,
+          as: "user",
+          attributes: ["f_name", "l_name"],
+          include: [
+            {
+              model: db.Position,
+              as: "position",
+              attributes: ["pos_name"],
+            },
+          ],
+        },
+      ],
       where: {
         org_id,
         attendance_date: {

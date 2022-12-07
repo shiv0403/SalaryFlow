@@ -10,13 +10,13 @@ module.exports = function (sequelize, DataTypes) {
       createdAt: {
         type: DataTypes.DATE,
         set() {
-          this.setDataValue(moment().utcOffset("+05:30"));
+          this.setDataValue(moment());
         },
       },
       updatedAt: {
         type: DataTypes.DATE,
         set() {
-          this.setDataValue(moment().utcOffset("+05:30"));
+          this.setDataValue(moment());
         },
       },
     },
@@ -25,6 +25,14 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
     }
   );
+
+  Attendance.associate = function (models) {
+    Attendance.hasOne(models.User, {
+      foreignKey: "id",
+      sourceKey: "user_id",
+      as: "user",
+    });
+  };
 
   return Attendance;
 };
