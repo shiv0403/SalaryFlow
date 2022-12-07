@@ -6,6 +6,7 @@ module.exports = function (sequelize, DataTypes) {
     {
       user_ids: DataTypes.STRING,
       org_id: DataTypes.INTEGER,
+      user_bank_id: DataTypes.INTEGER,
       createdAt: {
         type: DataTypes.DATE,
         set() {
@@ -24,5 +25,14 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
     }
   );
+
+  SalaryTrans.associate = function (models) {
+    SalaryTrans.hasOne(models.UserBank, {
+      foreignKey: "id",
+      sourceKey: "user_bank_id",
+      as: "companyBank",
+    });
+  };
+
   return SalaryTrans;
 };

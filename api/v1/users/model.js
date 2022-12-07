@@ -13,6 +13,7 @@ module.exports = function (sequelize, DataTypes) {
       pos_id: DataTypes.INTEGER,
       incr: DataTypes.DOUBLE,
       org_id: DataTypes.INTEGER,
+      user_bacc_id: DataTypes.INTEGER,
       profile_img: DataTypes.STRING,
       doj: DataTypes.DATE,
       leave_cnt: DataTypes.INTEGER,
@@ -46,6 +47,12 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: "id",
       sourceKey: "dept_id",
       as: "department",
+    });
+
+    User.hasOne(models.UserBank, {
+      foreignKey: "id",
+      sourceKey: "user_bacc_id",
+      as: "userBank",
     });
   };
 
