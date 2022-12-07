@@ -36,14 +36,17 @@ exports.getRmbOrg = async function (req, res) {
       },
     });
 
-    let count_pending = 0;
+    let count_pending = 0,
+      count_accepted = 0;
     for (let i = 0; i < reimbs.length; ++i) {
       if (reimbs[i].isClaimed === 0) {
         count_pending++;
+      } else if (reimbs[i].isClaimed === 1) {
+        count_accepted++;
       }
     }
 
-    res.status(200).send({ reimbs, count_pending });
+    res.status(200).send({ reimbs, count_pending, count_accepted });
   } catch (error) {
     res.status(500).send({ msg: messages.RMB_NOT_GET });
   }
