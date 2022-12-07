@@ -26,5 +26,14 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
     }
   );
+
+  UserBank.associate = function (models) {
+    UserBank.hasOne(models.Bank, {
+      foreignKey: "id",
+      sourceKey: "bank_id",
+      as: "bank",
+    });
+  };
+
   return UserBank;
 };

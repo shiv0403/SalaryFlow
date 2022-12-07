@@ -20,6 +20,13 @@ exports.getUserBank = async function (req, res) {
   let { user_id } = req.params;
   try {
     const userBank = await db.UserBank.findOne({
+      include: [
+        {
+          model: db.Bank,
+          as: "bank",
+          attributes: ["bank_name", "bank_logo"],
+        },
+      ],
       where: {
         user_id,
       },
