@@ -28,6 +28,7 @@ exports.getRmbOrg = async function (req, res) {
       include: [
         {
           model: db.User,
+          attributes: ["f_name", "l_name"],
           as: "user",
         },
       ],
