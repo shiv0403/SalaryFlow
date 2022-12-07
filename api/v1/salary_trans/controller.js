@@ -87,6 +87,10 @@ exports.getSalaryTransUser = async function (req, res) {
           model: db.UserBank,
           as: "userBank",
         },
+        {
+          model: db.Position,
+          as: "position",
+        },
       ],
       where: {
         id: user_id,
