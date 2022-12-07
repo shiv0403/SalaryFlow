@@ -2,6 +2,7 @@ const { Sequelize } = require("sequelize");
 const db = require("../../../config/sequelize");
 const messages = require("./messages.json");
 const { Op } = require("sequelize");
+const { generateUploadURL } = require("../../../helper/s3");
 
 exports.addReimb = async function (req, res) {
   let { rmb_receipt, rmb_reason, user_id, org_id, isClaimed, remark, rmb_amt } =
@@ -20,6 +21,11 @@ exports.addReimb = async function (req, res) {
   } catch (error) {
     res.status(500).send({ msg: messages.RMB_NOT_ADDED });
   }
+};
+
+exports.photoUpload = async function (req, res) {
+  const uploadUrl = await generateUploadURL();
+  res.status(200).send({ uploadUrl });
 };
 
 exports.getRmbOrg = async function (req, res) {
