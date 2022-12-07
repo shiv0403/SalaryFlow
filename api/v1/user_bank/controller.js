@@ -16,6 +16,27 @@ exports.addUserBank = async function (req, res) {
   }
 };
 
+exports.updateUserBank = async function (req, res) {
+  let { user_id, ifsc_code, acc_no, bank_id } = req.body;
+  try {
+    const updatedBank = await db.UserBank.update(
+      {
+        bank_ifsc: ifsc_code,
+        acc_no,
+        bank_id,
+      },
+      {
+        where: {
+          user_id,
+        },
+      }
+    );
+    res.status(200).send({ msg: messages.USER_BANK_UPDATED });
+  } catch (error) {
+    res.status(500).send({ msg: messages.USER_BANK_NOT_UPDATED });
+  }
+};
+
 exports.getUserBank = async function (req, res) {
   let { user_id } = req.params;
   try {

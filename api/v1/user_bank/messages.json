@@ -1,4 +1,6 @@
 {
   "USER_BANK_NOT_ADDED": "User bank account not added",
-  "USER_BANK_NOT_GET": "Could not get user's bank acc"
+  "USER_BANK_NOT_GET": "Could not get user's bank acc",
+  "USER_BANK_UPDATED": "User bank account updated",
+  "USER_BANK_NOT_UPDATED": "User bank acc not updated"
 }
