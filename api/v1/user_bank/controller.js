@@ -10,6 +10,17 @@ exports.addUserBank = async function (req, res) {
       acc_no,
       bank_ifsc,
     });
+
+    const updatedUser = await db.User.update(
+      {
+        user_bacc_id: userBank.id,
+      },
+      {
+        where: {
+          id: user_id,
+        },
+      }
+    );
     res.status(201).send(userBank);
   } catch (error) {
     res.status(500).send({ msg: messages.USER_BANK_NOT_ADDED });

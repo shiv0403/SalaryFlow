@@ -112,11 +112,13 @@ exports.login = async function (req, res) {
 exports.addEmp = async function (req, res) {
   let { f_name, l_name, email, pos_id, dept_id, doj, org_id } = req.body;
   try {
+    let user_pass = makePassword(5);
+    let pass = hashPassword(user_pass);
     const emp = await db.User.create({
       f_name,
       l_name,
       email,
-      password: hashPassword(makePassword(5)),
+      password: pass,
       isAdmin: 0,
       pos_id,
       dept_id,
@@ -125,7 +127,7 @@ exports.addEmp = async function (req, res) {
     });
 
     //also mail the emp their creds
-    res.status(201).send({ ...emp.dataValues, password: "test" });
+    res.status(201).send({ ...emp.dataValues, password: user_pass });
   } catch (error) {
     res.status(500).send({ msg: messages.EMP_NOT_ADDED });
   }
