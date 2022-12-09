@@ -43,7 +43,8 @@ exports.signup = async function (req, res) {
       org_name,
       user_id: user.id,
       emps,
-      org_logo,
+      org_logo:
+        "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512__340.jpg",
       auto_pay: 0,
     });
 
